@@ -1,0 +1,41 @@
+﻿<!--
+
+    Compose operate, add и multiply function, to make the expression in line 18 executable 
+    and follows ( 2 + 3 ) + ( 4 * 5 )
+
+-->
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        
+        add = function(){return "+"}
+        multiply = function(){return "*"}
+
+        // add = "+"
+        // multiply = "*"
+
+        function operate (operation, fistNum, secondNum){
+            try{
+                if(typeof fistNum !== "number" || typeof secondNum !== "number"){
+                    throw new Error("Wrong type of parameters")
+                }
+                if(operation() == "+") return fistNum + secondNum;
+                else if(operation() == "*") return fistNum * secondNum;
+                else throw new Error("Wrong operetion given")
+            }
+            catch(e){
+                console.error(e)
+            }
+        }
+
+        var i = operate(add, operate(add, 2, 3), operate(multiply, 4, 5)); // (2 + 3) + (4 * 5)
+
+        document.write(i); // output 25 
+
+    </script>
+</body>
+</html>

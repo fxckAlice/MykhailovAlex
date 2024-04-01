@@ -1,0 +1,57 @@
+﻿<!--
+
+    Implement sum function. It takes array (or semi array object - length property exists) of integers and returns sum of them.
+    Need to properly handle null and undefined
+-->
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        function sum(arr) {
+            try{
+                if(arr instanceof Array){
+                    return arr.reduce((acumulator, curentValue) => {
+                        if(typeof curentValue === "number") {
+                            acumulator += curentValue;
+                            return acumulator;
+                        }
+                        else if(typeof curentValue === "undefined" || curentValue == null){
+                            return acumulator;
+                        }
+                        else throw new Error("Wrong type of element")
+                    } , 0)
+                    
+                }
+                if(typeof arr === "object"){
+                    let sum = 0;
+                    for(let i = 0; i < arr.length; i++){
+                        if(typeof Object.values(arr)[i] === "number") {
+                            sum += Object.values(arr)[i];
+                        }
+                        else if(typeof Object.values(arr)[i] === "undefined" || Object.values(arr)[i] == null){
+                            continue;
+                        }
+                        else throw new Error("Wrong type of element")
+                    }
+                    return sum;
+                }
+                else throw new Error("Wrong type of prameter")
+            }
+            catch(e){
+                console.error(e);
+            }
+        }
+
+        var result = sum([1, 2, null, undefined, 3]);
+        console.log(result); // output "6"
+
+        result = sum({ "0": 5, "1": 10, "2": 15, length: 3 });
+        console.log(result); // output 30
+
+        result = sum([1, 2, 3, "string"]); // throw an error "sum(): arg should be numbers");
+    </script>
+</body>
+</html>

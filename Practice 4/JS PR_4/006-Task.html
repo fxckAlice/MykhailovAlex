@@ -1,0 +1,43 @@
+﻿<!--
+
+    Implement copyPropertyNamesToArray function. The second param should be optional.
+    The function returns arr of properties. If the second param exists it should be populated with obj properties.
+	
+	Hints: instanceof, typeof, throw new Error("")
+
+-->
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        function copyPropertyNamesToArray(obj, arr = new Array()) {
+           try{
+            if(typeof obj !== 'object'){
+                throw new Error("Parameter 'obj' is not an object");
+            }
+            if(!(arr instanceof Array)){
+                throw new Error("Parameter 'arr' is not an array");
+            }
+           }
+           catch(e){
+            console.error(e);
+           }
+           
+            arr.push(Object.keys(obj));
+           return arr;
+        }
+
+        var obj1 = { a: 10, b: 20 };
+        var obj2 = { c: 30, d: 40 };
+
+        var a = copyPropertyNamesToArray(obj1); 
+
+        copyPropertyNamesToArray(obj2, a);
+
+        alert(a); // output "a,b,c,d"
+    </script>
+</body>
+</html>

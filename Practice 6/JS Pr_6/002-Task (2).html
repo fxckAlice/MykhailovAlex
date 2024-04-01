@@ -1,0 +1,39 @@
+﻿<!-- 
+
+    Compose function-ctor Adder(startingValue).
+    Instances of this function should contain aggregation value of user input.
+
+    Specification:
+    - function should hold current value. Init internal property with startingValue param.
+    - addInput() operation shows prompt and sum user input with current value.
+    - showValue() write current value.
+
+-->
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+
+        function Adder(startingValue) {
+            Adder.prototype.startingValue = startingValue
+        }
+
+        Adder.prototype.addInput = function(){
+            let inputValue = prompt("Enter value!")
+            this.startingValue += +inputValue
+        }
+
+        Adder.prototype.showValue = function(){
+            console.log(this.startingValue)
+        }
+
+        var adder = new Adder(1); // init value - 1
+        adder.addInput(); // add some value
+        adder.addInput(); // add another value
+        adder.showValue(); // write current value
+
+    </script>
+</body>
+</html>
