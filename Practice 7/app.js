@@ -4,14 +4,14 @@ http.createServer((req, res) => {
     res.end('Hello World')
 }).listen(8080)
 
-const mainFun = require("./Task 1") //       <--
-mainFun(() => {console.log("call1")}, () => {console.log("call2")})
-
-
-const mainFun2 = require("./Task 2") //       <--
-mainFun2().then((result) => {
-   console.log(result());
-})
+// const mainFun = require("./Task 1") //       <--
+// mainFun(() => {console.log("call1")}, () => {console.log("call2")})
+//
+//
+// const mainFun2 = require("./Task 2") //       <--
+// mainFun2().then((result) => {
+//    console.log(result());
+// })
 
 
 // const mainFun3 = require('./Task 3') //      <--
@@ -24,6 +24,11 @@ mainFun2().then((result) => {
 // mainFun3(2).then((result) => {
 //     console.log(result())
 // })
+
+
+const mainFun4 = require("./Task 4")
+const supply = require('./Supply')
+console.log(mainFun4(new supply(true, true, true, true, true, true, true)));
 
 new Promise((resolve, reject) => {
     resolve("done")
