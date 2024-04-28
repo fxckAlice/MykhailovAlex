@@ -26,9 +26,9 @@ http.createServer((req, res) => {
 // })
 
 
-const mainFun4 = require("./Task 4")
+const makeBreakfast = require("./Task 4")
 const supply = require('./Supply')
-console.log(mainFun4(new supply(true, true, true, true, true, true, true)));
+makeBreakfast(new supply(true, true, true, true, true, true, true))
 
 new Promise((resolve, reject) => {
     resolve("done")
