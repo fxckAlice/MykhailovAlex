@@ -1,6 +1,6 @@
 const express = require('express');
 const Joi = require('joi')
-
+const Router = express.Router();
 const path = require('path');
 const {bool} = require("joi");
 const app = express();
@@ -55,29 +55,45 @@ getElement = function (id){
     })
 }
 
-app.get(`/products/:id`, function(req, res) {
-    const id = req.params.id;
-    let ifDone = false
-    products.find((element, index, products) => {
-        if(element["id"] === Number(id)){
-            res.status(200).send(element);
-            ifDone = true
-        }
+Router.route('/products')
+    .get((req, res) => {
+        res.send(products)
+    });
+Router.route('/products/:id')
+    .get((req, res) => {
+        const id = req.params.id;
+        let ifDone = false
+        products.find((element, index, products) => {
+            if(element["id"] === Number(id)){
+                res.status(200).send(element);
+                ifDone = true
+                return true
+            }
     })
 
-    if(!ifDone){
-        res.status(404).send("Not Found");
-    }
-})
+        if(!ifDone){
+            res.status(404).send("Not Found");
+        }
+    })
+    .delete((req, res) => {
+        const id = req.params.id;
+        let ifDone = false
 
-app.get('/products', function(req, res) {
-    if(typeof products !== "undefined" && products.length > 0){
-        res.status(200).send(products);
-    }
-    else{
-        res.status(404).send("Not Found");
-    }
-})
+        products.find((element, index) => {
+            if(typeof element !== "undefined" && element['id'] === Number(id)){
+                res.status(200).send(element);
+                products.splice(index, 1)
+                ifDone = true
+            }
+
+        })
+        if(!ifDone){
+            res.status(404).send("Not Found");
+        }
+    });
+
+
+
 
 app.post(`/products/post/:name/:price`, function(req, res) {
     const name = req.params.name;
@@ -119,22 +135,7 @@ app.post(`/products/post/:name/:price`, function(req, res) {
     }
 })
 
-app.delete(`/products/del/:id`, function(req, res) {
-    const id = req.params.id;
-    let ifDone = false
 
-    products.find((element, index) => {
-        if(typeof element !== "undefined" && element['id'] === Number(id)){
-            res.status(200).send(element);
-            products.splice(index, 1)
-            ifDone = true
-        }
-
-    })
-    if(!ifDone){
-        res.status(404).send("Not Found");
-    }
-})
 
 app.put('/products/put/:id/:name/:price', function(req, res) {
     const id = req.params.id;
